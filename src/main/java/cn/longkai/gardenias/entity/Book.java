@@ -36,7 +36,9 @@ public class Book {
 	private String ISBN;
 	private float price;
 	@Column(name = "borrowed_times")
-	private int BorrowedTimes;
+	private int borrowedTimes;
+	@Column(name = "booked_times")
+	private int bookedTimes;
 	@Column(name = "click_times")
 	private int clickTimes;
 	private int total;
@@ -111,11 +113,19 @@ public class Book {
 	}
 
 	public int getBorrowedTimes() {
-		return BorrowedTimes;
+		return borrowedTimes;
 	}
 
 	public void setBorrowedTimes(int borrowedTimes) {
-		BorrowedTimes = borrowedTimes;
+		this.borrowedTimes = borrowedTimes;
+	}
+
+	public int getBookedTimes() {
+		return bookedTimes;
+	}
+
+	public void setBookedTimes(int bookedTimes) {
+		this.bookedTimes = bookedTimes;
 	}
 
 	public int getClickTimes() {
@@ -190,13 +200,13 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", author=" + author + ", category="
-				+ category + ", publishHouse=" + publishHouse
+		return "Book [id=" + id + ", title=" + title + ", author=" + author
+				+ ", category=" + category + ", publishHouse=" + publishHouse
 				+ ", publishDate=" + publishDate + ", ISBN=" + ISBN
-				+ ", price=" + price + ", BorrowedTimes=" + BorrowedTimes
-				+ ", clickTimes=" + clickTimes + ", total=" + total
-				+ ", remain=" + remain + ", includedDate=" + includedDate
-				+ ", image=" + image + ", url=" + url + "]";
+				+ ", price=" + price + ", borrowedTimes=" + borrowedTimes
+				+ ", bookedTimes=" + bookedTimes + ", clickTimes=" + clickTimes
+				+ ", total=" + total + ", remain=" + remain + ", includedDate="
+				+ includedDate + ", image=" + image + ", url=" + url + "]";
 	}
 
 }

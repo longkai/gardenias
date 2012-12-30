@@ -68,3 +68,4 @@
 22:18:02.874  INFO-> 账户：longkai，密码123456                    main()@c.l.g.repository.impl.GeneralDaoImpl:19
 22:19:12.397  INFO-> 账户：longkai，密码123456                    main()@c.l.g.repository.impl.GeneralDaoImpl:19
 22:22:26.811  INFO-> 账户：longkai，密码123456                    main()@c.l.g.repository.impl.GeneralDaoImpl:19
+22:24:07.542  INFO-> 账户：longkai，密码123456                    main()@c.l.g.repository.impl.GeneralDaoImpl:19

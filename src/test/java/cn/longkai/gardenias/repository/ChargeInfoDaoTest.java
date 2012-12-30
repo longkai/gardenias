@@ -25,7 +25,7 @@ public class ChargeInfoDaoTest {
 	
 	@Test
 	public void testHowManyChargeBooks() {
-		int count = chargeInfoDao.howManyChargeBooks(reader);
+		int count = chargeInfoDao.howManyChargedBooks(reader);
 		assertThat(count, is(0));
 	}
 

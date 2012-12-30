@@ -2,9 +2,11 @@ package cn.longkai.gardenias.repository.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +75,38 @@ public abstract class GeneralDaoImpl<T> implements GenericDao<T> {
 				.setMaxResults(howMany)
 				.getResultList();
 		return p.setList(list);
+	}
+	
+	/**
+	 * 执行一个对象的查询，只返回一个对象，支持<b style="color: red;">?</b>格式来作为占位符的格式。
+	 * @param hql 预处理hql
+	 * @param type 返回的对象类型
+	 * @param objects 参数, 为null表示无占位符
+	 */
+	protected T executeQuery(String hql, Class<T> type, Object...objects) {
+		TypedQuery<T> query = em.createQuery(hql, type).setFirstResult(0).setMaxResults(1);
+		if (objects != null) {
+			for (int i = 0; i < objects.length; i++) {
+				query.setParameter(i + 1, objects[i]);
+			}
+		}
+		return query.getSingleResult();
+	}
+	
+	/**
+	 * 执行一个对象的查询，只返回一个对象，支持支<b style="color: red;">:name</b>格式来作为占位符的格式。
+	 * @param hql 预处理hql
+	 * @param type 返回的对象类型
+	 * @param nameAndValue 参数名和参数值, 为null表示无占位符
+	 */
+	protected T executeQuery(String hql, Class<T> type, Map<String, Object> nameAndValue) {
+		TypedQuery<T> query = em.createQuery(hql, type).setFirstResult(0).setMaxResults(1);
+		if (nameAndValue != null) {
+			for (String name : nameAndValue.keySet()) {
+				query.setParameter(name, nameAndValue.get(name));
+			}
+		}
+		return query.getSingleResult();
 	}
 	
 }

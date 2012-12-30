@@ -20,7 +20,7 @@ public class ChargeInfoDaoImpl extends GeneralDaoImpl<ChargeInfo> implements Cha
 		= "SELECT COUNT(ci.id) FROM ChargeInfo ci where ci.reader = ?";
 	
 	@Override
-	public int howManyChargeBooks(Reader reader) {
+	public int howManyChargedBooks(Reader reader) {
 		Long counter = em.createQuery(SELECT_CHARGED_COUNT, Long.class)
 				.setParameter(1, reader)
 				.getSingleResult();

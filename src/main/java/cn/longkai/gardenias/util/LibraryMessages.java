@@ -23,6 +23,9 @@ public class LibraryMessages {
 	/** 由于预约的图书数目已经达到最大值，预约图书失败 */
 	public static final String BOOKING_FAIL_FOR_MAX_BOOKING_NUMBER = "对不起，您所预约的图书数目已经达到最大值，预约失败！";
 	
+	/** 不允许重复预约 */
+	public static final String BOOKING_FAIL_FOR_THE_SAME_BOOK = "对不起，您已经预约过这本书了，不允许重复预约！";
+	
 	/** 由于预约图书被借光了，借阅图书失败 */
 	public static final String LEND_FAIL_FOR_NONE_BOOKS = "对不起，您想借阅的图书已经被全部借出，请等待其返还！";
 	
@@ -31,5 +34,11 @@ public class LibraryMessages {
 	
 	/** 借阅的图书已经被预定了，借书失败 */
 	public static final String LEND_FAIL_FOR_HAS_BEEN_BOOKED = "对不起，您所借阅的图书已经被预定了，借书失败！";
+	
+	/** 同一本书不能借阅两次 */
+	public static final String LEND_FAIL_FOR_HAS_BEEN_LENDED_BY_SELF = "对不起，您已经借阅过该书了，不能借阅同一本书！";
+	
+	/** 未知的错误 */
+	public static final String UNKNOWN_ERROR = "未知的错误，请检查您的操作或者联系管理员！";
 	
 }

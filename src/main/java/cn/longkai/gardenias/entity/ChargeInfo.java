@@ -102,5 +102,20 @@ public class ChargeInfo {
 		return "ChargeInfo [id=" + id + ", reader=" + reader + ", book=" + book
 				+ ", fee=" + fee + ", chargeDate=" + chargeDate + "]";
 	}
+	
+	/**
+	 * 按照当前的系统时间获得一个罚款记录实例。
+	 * @param book
+	 * @param reader
+	 * @param fee
+	 */
+	public static ChargeInfo getInstance(Book book, Reader reader, float fee) {
+		ChargeInfo chargeInfo = new ChargeInfo();
+		chargeInfo.setBook(book);
+		chargeInfo.setReader(reader);
+		chargeInfo.setFee(fee);
+		chargeInfo.setChargeDate(new Date());
+		return chargeInfo;
+	}
 
 }
