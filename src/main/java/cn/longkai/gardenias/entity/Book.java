@@ -42,7 +42,11 @@ public class Book {
 	@Column(name = "click_times")
 	private int clickTimes;
 	private int total;
+//	@Column(name = "current_booked_times")
+//	private int currentBookedTimes;
 	private int remain;
+	private String description;
+	private boolean lendable = true; // 默认是可借的
 	@Column(name = "include_date")
 	private Date includedDate;
 	private String image;
@@ -144,12 +148,36 @@ public class Book {
 		this.total = total;
 	}
 
+//	public int getCurrentBookedTimes() {
+//		return currentBookedTimes;
+//	}
+//
+//	public void setCurrentBookedTimes(int currentBookedTimes) {
+//		this.currentBookedTimes = currentBookedTimes;
+//	}
+
 	public int getRemain() {
 		return remain;
 	}
 
 	public void setRemain(int remain) {
 		this.remain = remain;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isLendable() {
+		return lendable;
+	}
+
+	public void setLendable(boolean lendable) {
+		this.lendable = lendable;
 	}
 
 	public Date getIncludedDate() {

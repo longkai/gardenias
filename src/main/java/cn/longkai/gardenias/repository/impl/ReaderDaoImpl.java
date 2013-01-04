@@ -35,4 +35,15 @@ public class ReaderDaoImpl extends GeneralDaoImpl<Reader> implements ReaderDao {
 		return howMany > 0 ? true : false;
 	}
 
+	@Override
+	public Reader remove(Reader entity) {
+		String delete1 = "delete from BookingInfo bi where bi.reader = ?";
+		String delete2 = "delete from ChargeInfo ci where ci.reader = ?";
+		String delete3 = "delete from LendInfo li where li.reader = ?";
+		em.createQuery(delete1).setParameter(1, entity).executeUpdate();
+		em.createQuery(delete2).setParameter(1, entity).executeUpdate();
+		em.createQuery(delete3).setParameter(1, entity).executeUpdate();
+		return super.remove(entity);
+	}
+	
 }

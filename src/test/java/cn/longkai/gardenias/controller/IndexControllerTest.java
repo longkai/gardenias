@@ -49,5 +49,11 @@ public class IndexControllerTest {
 	public void hi() {
 		assertThat(this.indexController.index().getViewName(), is("hello"));
 	}
+	
+	@Test
+	public void t() {
+//		this.mockMvc.perform(post("/login", null).param("account", "longkai").param("password", "123456"));
+		System.out.println(indexController.login("longkai", "123456").getModel().get("reader"));
+	}
 
 }

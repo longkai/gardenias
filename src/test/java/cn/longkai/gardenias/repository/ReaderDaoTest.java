@@ -1,7 +1,8 @@
 package cn.longkai.gardenias.repository;
 
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.util.Date;
 
@@ -11,10 +12,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.AssertThrows;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.longkai.gardenias.entity.Book;
+import cn.longkai.gardenias.entity.ChargeInfo;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.util.Pagination;
 
@@ -26,12 +30,18 @@ public class ReaderDaoTest {
 	@Inject
 	private ReaderDao readerDao;
 	
+	@Inject
+	private ChargeInfoDao chargeInfoDao;
+	
+	@Inject
+	private BookDao bookDao;
+	
 	private Reader reader;
 	
 	@Before
 	public void setUp() {
 		reader = new Reader();
-		reader.setAccount("longkai");
+		reader.setAccount("test");
 		reader.setAddress("广西桂林");
 		reader.setAge(21);
 		reader.setEmail("im.longkai@gmail.com");
@@ -60,7 +70,7 @@ public class ReaderDaoTest {
 	
 	@Test
 	public void testSize() {
-		assertThat(readerDao.size(Reader.class), is(0));
+		assertThat(readerDao.size(Reader.class), is(3));
 	}
 	
 	@Test
@@ -93,6 +103,18 @@ public class ReaderDaoTest {
 		
 		p = readerDao.list(2, 15, Reader.class);
 		assertThat(p.getList().size(), is(5));
+	}
+	
+	@Test
+	public void testRemeove() {
+		Reader reader = readerDao.find(2, Reader.class);
+		Book book = bookDao.find(5, Book.class);
+		ChargeInfo c = chargeInfoDao.find(book, reader);
+		assertThat(c, notNullValue());
+		readerDao.remove(reader);
+//		assertThat(readerDao.size(Reader.class), is(2));
+		c = chargeInfoDao.find(book, reader);
+		assertThat(c, nullValue());
 	}
 	
 }

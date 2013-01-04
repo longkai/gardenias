@@ -25,7 +25,8 @@ public class ChargeInfo {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "reader_id")
 	private Reader reader;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)

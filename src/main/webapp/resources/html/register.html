@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 登陆</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-add-back-btn="true">
+		<a href="/">返回首页</a>
+		<h1>欢迎注册图书馆会员！</h1>
+		<a href="login.html">我要登陆！</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<form action="/register" method="post" data-ajax="false">
+			<input type="text" name="account" id="account" value="" placeholder="读者账号" />
+			<input type="password" name="password" id="password" value="" placeholder="读者密码" />
+			<input type="password" name="password2" id="password2" value="" placeholder="确认密码" />
+			<input type="text" name="age" id="age" value="" placeholder="年龄" />
+			<input type="text" name="email" id="email" value="" placeholder="电子邮件" />
+			<input type="text" name="idCard" id="idCard" value="" placeholder="身份证" />
+			<input type="text" name="name" id="name" value="" placeholder="真实姓名" />
+			<input type="text" name="nick" id="nick" value="" placeholder="用户昵称" />
+
+			<label for="sex">性别:</label>
+			<select name="sex" id="sex" data-role="slider">
+				<option value="1">男</option>
+				<option value="0">女</option>
+			</select> 
+
+			<label for="address" class="select">你的居住地</label>
+			<select name="address" id="address">
+			   	<option value="standard">桂林</option>
+			   	<option value="rush">成都</option>
+			   	<option value="express">北京</option>
+			   	<option value="overnight">杭州</option>
+			</select>
+
+			<input type="submit" value="马上注册！" />
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

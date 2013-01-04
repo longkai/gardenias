@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.repository.ReaderDao;
@@ -21,6 +23,7 @@ import cn.longkai.gardenias.util.LibraryMessages;
  * @since 2012-12-29
  */
 @Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class ReaderServiceImpl implements ReaderService {
 
 	private static final Logger l = LoggerFactory.getLogger(ReaderServiceImpl.class);
@@ -29,6 +32,7 @@ public class ReaderServiceImpl implements ReaderService {
 	private ReaderDao readerDao;
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void register(Reader reader) {
 		if (readerDao.exists(reader.getAccount())) {
 			l.error("账号:{} 已经被注册过了", reader.getAccount());
@@ -40,6 +44,7 @@ public class ReaderServiceImpl implements ReaderService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public Reader login(String account, String password) {
 		Reader reader = null;
 		try {

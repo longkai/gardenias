@@ -1,7 +1,6 @@
 package cn.longkai.gardenias.repository;
 
 import cn.longkai.gardenias.entity.Reader;
-import cn.longkai.gardenias.util.Pagination;
 
 /**
  * 读者的数据访问接口

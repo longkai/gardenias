@@ -1,5 +1,7 @@
 package cn.longkai.gardenias.repository.impl;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -22,7 +24,7 @@ public class BookingInfoDaoImpl extends GeneralDaoImpl<BookingInfo> implements B
 	
 	/** 查询有效的图书预约数量 */
 	private static final String SELECT_BOOKED_COUNT_BY_READER 
-		= "SELECT COUNT(bi.id) FROM BookingInfo bi where bi.reader = ? AND bi.cancel IS false AND bi.deal IS false and bi.bookDate < :now";
+		= "SELECT COUNT(bi.id) FROM BookingInfo bi where bi.reader = ? AND bi.cancel IS false AND bi.deal IS false and bi.bookDate < ?";
 	
 	/** 查询一本书有效地预约数量 */
 	private static final String SELECT_HAS_BEEN_BOOKED_BY_BOOK
@@ -34,13 +36,15 @@ public class BookingInfoDaoImpl extends GeneralDaoImpl<BookingInfo> implements B
 	
 //	直接在hql中完成更新！
 	/** 更新已经过期的该本预约图书 */
-	private static final String UPDATE_RUNOUT
-		= "UPDATE BookingInfo bi SET bi.deal = true WHERE bi.deal IS false and bi.cancel IS false and bi.book";
+//	private static final String UPDATE_RUNOUT
+//		= "UPDATE BookingInfo bi SET bi.deal = true WHERE bi.deal IS false and bi.cancel IS false and bi.book";
+//		= "FROM BookingInfo bi WHERE bi.book = ? AND bi.deal IS false AND bi.cancel IS false";
 	
 	@Override
 	public int howManyBooksBeenBooked(Reader reader) {
 		Long counter = em.createQuery(SELECT_BOOKED_COUNT_BY_READER, Long.class)
 				.setParameter(1, reader)
+				.setParameter(2, new Date())
 				.getSingleResult();
 		
 		return counter.intValue();
@@ -116,10 +120,20 @@ public class BookingInfoDaoImpl extends GeneralDaoImpl<BookingInfo> implements B
 		return bookingInfo;
 	}
 
+	/**
+	 * 刷新一下预约信息中仍未处理的过期的信息
+	 */
 	@Override
 	public void refresh(Book book) {
-		// TODO Auto-generated method stub
-		
+		List<BookingInfo> bookingInfos = em.createQuery(SELECT_HAS_BEEN_BOOKED_BY_BOOK, BookingInfo.class)
+				.setParameter(1, book)
+				.getResultList();
+		for (BookingInfo bookingInfo : bookingInfos) {
+			if (!this.booked(bookingInfo)) {
+				bookingInfo.setDeal(true);
+				super.merge(bookingInfo);
+			}
+		}
 	}
 	
 }

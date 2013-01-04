@@ -1,5 +1,6 @@
 package cn.longkai.gardenias.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +38,10 @@ public class LibraryUtil {
 		= ONE_MONTH_DAYS * ONE_DAY_HOURS * ONE_HOUR_MINUTES 
 			* ONE_MINUTE_SECONDS * ONE_SECOND_MILLIS;
 	
-	public static final long ONE_DAY_MILLIS = ONE_MONTH_MILLIS / ONE_MONTH_DAYS; 
+	public static final long ONE_DAY_MILLIS = ONE_MONTH_MILLIS / ONE_MONTH_DAYS;
+	
+	/** 默认的日期格式 */
+	private static final String DEFAULT_DATE_FOMAT_PATTERN = "yyyy-DD-mm HH:mm:ss";
 
 	/**
 	 * 监测是否为空。
@@ -101,6 +105,14 @@ public class LibraryUtil {
 	 */
 	public static boolean doesItCharged(LendInfo lendInfo) {
 		return calculateDaysGap(lendInfo.getLendDate()) > LIbraryConstant.MAX_LEND_DATE ? true : false;
+	}
+	
+	/**
+	 * 获取当前时间的字符串
+	 * @return
+	 */
+	public static String getCurrentTime() {
+		return new SimpleDateFormat(DEFAULT_DATE_FOMAT_PATTERN).format(new Date());
 	}
 
 }

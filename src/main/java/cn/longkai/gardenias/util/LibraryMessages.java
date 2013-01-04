@@ -17,6 +17,9 @@ public class LibraryMessages {
 	/** 由于有欠款，操作失败 */
 	public static final String FAIL_FOR_HAS_CHARGES = "对不起，您有欠款未交付，操作失败！";
 	
+	/** 由于达到了最大一本书的预约数量，预约失败 */
+	public static final String FAIL_FOR_REACH_MAX_BOOKED_TIMES = "对不起，这本书已经达到了最大预约数量，预约失败！";
+	
 	/** 因为有剩余图书，预约图书失败 */
 	public static final String BOOKING_FAIL_FOR_HAS_BOOKS_REMAIN = "对不起，这本书还未被借阅，您可以借阅，不需要预约！";
 	
@@ -37,6 +40,15 @@ public class LibraryMessages {
 	
 	/** 同一本书不能借阅两次 */
 	public static final String LEND_FAIL_FOR_HAS_BEEN_LENDED_BY_SELF = "对不起，您已经借阅过该书了，不能借阅同一本书！";
+	
+	/** 读者没有欠款 */
+	public static final String NO_CHARGE = "您没有欠款！"; 
+	
+	/** 不允许借阅 */
+	public static final String NOT_ALLOWED_LEND = "对不起，这本书不外借！";
+	
+	/** 无权限 */
+	public static final String PERMISSION_DENIED = "对不起，您没有权限！";
 	
 	/** 未知的错误 */
 	public static final String UNKNOWN_ERROR = "未知的错误，请检查您的操作或者联系管理员！";

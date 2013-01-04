@@ -58,8 +58,10 @@ public class LibraryServiceImpl implements LibraryService {
 			bookingInfoDao.persist(bookingInfo);
 //			设置被预定次数+1 
 			book.setBookedTimes(book.getBookedTimes() + 1);
+//			设置当前的有效
+//			book.setCurrentBookedTimes(book.getCurrentBookedTimes() + 1);
 			bookDao.merge(book);
-			l.info("读者:{} 成功 预约 图书:{}", reader.getAccount(), book.getTitle());
+			l.info("读者: {} 成功 预约 图书:{}", reader.getAccount(), book.getTitle());
 		}
 		return bookingInfo;
 	}
@@ -107,7 +109,6 @@ public class LibraryServiceImpl implements LibraryService {
 	 * @param book
 	 */
 	private void refreshBookingInfo(Book book) {
-		// TODO Auto-generated method stub
 		bookingInfoDao.refresh(book);
 	}
 
@@ -130,8 +131,13 @@ public class LibraryServiceImpl implements LibraryService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public ChargeInfo charge(Book book, Reader reader) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!this.hasCharged(reader)) {
+			throw new LibraryException(LibraryMessages.NO_CHARGE);
+		}
+		ChargeInfo chargeInfo = chargeInfoDao.find(book, reader);
+		chargeInfo.setChargeDate(new Date());
+		chargeInfoDao.merge(chargeInfo);
+		return chargeInfo;
 	}
 
 	/**
@@ -141,6 +147,11 @@ public class LibraryServiceImpl implements LibraryService {
 	 */
 	private boolean bookable(Book book, Reader reader) {
 		LibraryUtil.checkNull(book, reader);	
+		
+//		if (this.hasMaxBookedTimes(book)) {
+//			l.info("图书：{} -> {}", reader.getAccount(), book.getTitle(), LibraryMessages.FAIL_FOR_REACH_MAX_BOOKED_TIMES);
+//			throw new LibraryException(LibraryMessages.FAIL_FOR_REACH_MAX_BOOKED_TIMES);
+//		}
 		
 		if (this.hasCharged(reader)) {
 			l.info("读者：{} -> {}", reader.getAccount(), book.getTitle(), LibraryMessages.FAIL_FOR_HAS_CHARGES);
@@ -165,6 +176,7 @@ public class LibraryServiceImpl implements LibraryService {
 		return true;
 	}
 	
+
 	/**
 	 * 该读者是否可以借阅该图书，若否，则抛出相应的<b style="color: red;">运行时异常</b>。
 	 * @param book
@@ -173,6 +185,10 @@ public class LibraryServiceImpl implements LibraryService {
 	 */
 	private boolean lendable(Book book, Reader reader) {
 		LibraryUtil.checkNull(book, reader);
+		
+		if (!book.isLendable()) {
+			throw new LibraryException(LibraryMessages.NOT_ALLOWED_LEND);
+		}
 		
 		if (this.hasCharged(reader)) {
 			l.info("读者：{} -> {}", reader.getAccount(), LibraryMessages.FAIL_FOR_HAS_CHARGES);
@@ -209,6 +225,14 @@ public class LibraryServiceImpl implements LibraryService {
 		
 		return true;
 	}
+	
+	/**
+	 * 判断该书是否达到了最大的有效预订数。
+	 * @param book
+	 */
+//	private boolean hasMaxBookedTimes(Book book) {
+//		return book.getCurrentBookedTimes() + 1 > LIbraryConstant.MAX_VALID_BOOKED_NUMBER;
+//	}
 	
 	/**
 	 * 该读者是否已经借阅了该图书。
