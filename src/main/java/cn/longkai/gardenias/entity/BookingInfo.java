@@ -31,7 +31,7 @@ public class BookingInfo {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private Book book;
 	@Column(name = "book_date")
-	private Date bookDate;
+	private Date date;
 	private boolean cancel;
 	private boolean deal;
 
@@ -59,12 +59,12 @@ public class BookingInfo {
 		this.book = book;
 	}
 
-	public Date getBookDate() {
-		return bookDate;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setBookDate(Date bookDate) {
-		this.bookDate = bookDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public boolean isCancel() {
@@ -108,7 +108,7 @@ public class BookingInfo {
 	@Override
 	public String toString() {
 		return "BookingInfo [id=" + id + ", reader=" + reader + ", book="
-				+ book + ", bookDate=" + bookDate + ", cancel=" + cancel
+				+ book + ", date=" + date + ", cancel=" + cancel
 				+ ", deal=" + deal + "]";
 	}
 	
@@ -125,7 +125,7 @@ public class BookingInfo {
 //		对象一初始化就是false，没有必要设置了
 //		bookingInfo.setDeal(false);
 //		bookingInfo.setCancel(false);
-		bookingInfo.setBookDate(new Date());
+		bookingInfo.setDate(new Date());
 		return bookingInfo;
 	}
 	

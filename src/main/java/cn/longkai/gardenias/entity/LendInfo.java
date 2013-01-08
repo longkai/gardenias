@@ -33,7 +33,7 @@ public class LendInfo {
 	@JoinColumn(name = "book_id")
 	private Book book;
 	@Column(name = "lend_date")
-	private Date lendDate;
+	private Date date;
 	@Column(name = "return_date")
 	private Date returnDate;
 	private boolean charge;
@@ -62,12 +62,12 @@ public class LendInfo {
 		this.book = book;
 	}
 
-	public Date getLendDate() {
-		return lendDate;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setLendDate(Date lendDate) {
-		this.lendDate = lendDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public Date getReturnDate() {
@@ -111,7 +111,7 @@ public class LendInfo {
 	@Override
 	public String toString() {
 		return "LendInfo [id=" + id + ", reader=" + reader + ", book=" + book
-				+ ", lendDate=" + lendDate + ", returnDate=" + returnDate
+				+ ", date=" + date + ", returnDate=" + returnDate
 				+ ", charge=" + charge + "]";
 	}
 	
@@ -124,7 +124,7 @@ public class LendInfo {
 		LendInfo lendInfo = new LendInfo();
 //		默认的就不写了0=0
 		lendInfo.setBook(book);
-		lendInfo.setLendDate(new Date());
+		lendInfo.setDate(new Date());
 		lendInfo.setReader(reader);
 		return lendInfo;
 	}

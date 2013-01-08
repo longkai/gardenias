@@ -1,6 +1,8 @@
 package cn.longkai.gardenias.service;
 
+import cn.longkai.gardenias.entity.BookingInfo;
 import cn.longkai.gardenias.entity.Reader;
+import cn.longkai.gardenias.util.Pagination;
 
 /**
  * 读者的对外服务接口。
@@ -22,5 +24,11 @@ public interface ReaderService {
 	 * @return 认证后的读者
 	 */
 	Reader login(String account, String password);
+	
+	/**
+	 * 读者修改个人信息
+	 * @param reader
+	 */
+	Reader update(Reader reader);
 	
 }

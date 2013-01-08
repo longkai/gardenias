@@ -34,7 +34,7 @@ public class ChargeInfo {
 	private Book book;
 	private float fee;
 	@Column(name = "charge_date")
-	private Date chargeDate;
+	private Date date;
 
 	public int getId() {
 		return id;
@@ -68,12 +68,12 @@ public class ChargeInfo {
 		this.fee = fee;
 	}
 
-	public Date getChargeDate() {
-		return chargeDate;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setChargeDate(Date chargeDate) {
-		this.chargeDate = chargeDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class ChargeInfo {
 	@Override
 	public String toString() {
 		return "ChargeInfo [id=" + id + ", reader=" + reader + ", book=" + book
-				+ ", fee=" + fee + ", chargeDate=" + chargeDate + "]";
+				+ ", fee=" + fee + ", date=" + date + "]";
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class ChargeInfo {
 		chargeInfo.setBook(book);
 		chargeInfo.setReader(reader);
 		chargeInfo.setFee(fee);
-		chargeInfo.setChargeDate(new Date());
+		chargeInfo.setDate(new Date());
 		return chargeInfo;
 	}
 

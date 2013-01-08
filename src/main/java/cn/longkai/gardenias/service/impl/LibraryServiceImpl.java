@@ -122,7 +122,7 @@ public class LibraryServiceImpl implements LibraryService {
 			return;
 		}
 		lendInfo.setCharge(true);
-		float fee = LibraryUtil.calculateDaysGap(lendInfo.getLendDate()) * LIbraryConstant.DAILY_CHARGE_FEE;
+		float fee = LibraryUtil.calculateDaysGap(lendInfo.getDate()) * LIbraryConstant.DAILY_CHARGE_FEE;
 		ChargeInfo chargeInfo = ChargeInfo.getInstance(lendInfo.getBook(), lendInfo.getReader(), fee);
 		chargeInfoDao.persist(chargeInfo);
 		l.info("用户：{} 由于借书：{} 超期， 罚款 {} 元！", lendInfo.getReader(), lendInfo.getReader().getAccount(), fee);
@@ -135,7 +135,7 @@ public class LibraryServiceImpl implements LibraryService {
 			throw new LibraryException(LibraryMessages.NO_CHARGE);
 		}
 		ChargeInfo chargeInfo = chargeInfoDao.find(book, reader);
-		chargeInfo.setChargeDate(new Date());
+		chargeInfo.setDate(new Date());
 		chargeInfoDao.merge(chargeInfo);
 		return chargeInfo;
 	}

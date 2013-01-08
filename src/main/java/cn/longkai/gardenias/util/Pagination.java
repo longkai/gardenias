@@ -2,6 +2,9 @@ package cn.longkai.gardenias.util;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 一个分页模型，在视图上展示实体列表。
  *
@@ -11,6 +14,8 @@ import java.util.List;
  * @since 2012-08-25
  */
 public class Pagination<T> {
+	
+	private static final Logger L = LoggerFactory.getLogger(Pagination.class);
 	
 	/** 包含实体的数组表 */
 	private List<T> list;
@@ -27,7 +32,9 @@ public class Pagination<T> {
 		this.pageSize = pageSize;
 		this.totalRecords = totalRecords;
 		this.total = (totalRecords - 1) / pageSize + 1;
-		this.page = page < 1 ? 1 : page > total ? total : page;
+//		this.page = page < 1 ? 1 : page > total ? total : page;
+		this.page = page; // 这里，由于我们使用了json动态加载数据，区别于以往的分页，所以，这里也就不计算是否越界了。 
+		L.info("当前页码：{}，每页记录：{}，所有记录：{}，总共页码：{}", this.page, this.pageSize, this.totalRecords, this.total);
 	}
 	
 	public List<T> getList() {

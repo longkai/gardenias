@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 查看个人信息</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="/resources/css/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="/resources/js/jquery-1.8.2.min.js"></script>
+	<script src="/resources/js/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header">
+		<a href="/reader/main">返回</a>
+		<h1>查看&修改 信息</h1>
+		<a href="/reader/logout">退出</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<h2>${msg}</h2>
+
+		<form action="/reader/update_self_info" method="post" data-ajax="false">
+			<input type="hidden" name="id" value="${reader.id}" />
+			<label for="account">读者账号:</label>
+			<input type="text" name="account" id="account" value="${reader.account}" disabled="true" />
+			<label for="age">年龄:</label>
+			<input type="text" name="age" id="age" value="${reader.age}" />
+			<label for="email">电子邮件:</label>
+			<input type="text" name="email" id="email" value="${reader.email}" />
+			<label for="nick">身份证:</label>
+			<input type="text" name="idCard" id="nick" value="${reader.idCard}" disabled="true" />
+			<label for="nick">真实姓名:</label>
+			<input type="text" name="nick" id="name" value="${reader.name}" disabled="true" />
+			<label for="nick">用户昵称:</label>
+			<input type="text" name="nick" id="nick" value="${reader.nick}" />
+
+			<label for="sex">性别:</label>
+			<select name="sex" id="sex" data-role="slider" disabled="true">
+				<#if reader.sex == true>
+					<option value="1" selected="selected">男</option>
+				<#else>
+					<option value="0" selected="selected">女</option>
+				</#if>
+			</select> 
+
+			<label for="address" class="select">你的居住地</label>
+			<select name="address" id="address" disabled="true">
+			   	<option value="${reader.address}" selected="selected">${reader.address}</option>
+			</select>
+
+			<input type="submit" value="修改个人信息！" />
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

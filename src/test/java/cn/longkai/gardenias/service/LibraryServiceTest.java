@@ -106,7 +106,7 @@ public class LibraryServiceTest {
 	public void testCharge() {
 		ChargeInfo c = libraryService.charge(bookHasCharge, readerWithCharge);
 //		assertThat(c, notNullValue());
-		assertThat(c.getChargeDate(), notNullValue());
+		assertThat(c.getDate(), notNullValue());
 	}
 
 }

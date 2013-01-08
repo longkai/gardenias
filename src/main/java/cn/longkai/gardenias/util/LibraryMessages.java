@@ -12,7 +12,7 @@ public class LibraryMessages {
 	public static final String ACCOUNT_HAS_BEEN_REGISTERED = "对不起，改账号已经被注册过啦！";
 	
 	/** 登录失败 */
-	public static final String LOGIN_FAIL = "对不起，登录失败！";
+	public static final String LOGIN_FAIL = "对不起，登录失败！请检查您的账号和密码是否正确！";
 	
 	/** 由于有欠款，操作失败 */
 	public static final String FAIL_FOR_HAS_CHARGES = "对不起，您有欠款未交付，操作失败！";

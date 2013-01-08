@@ -15,4 +15,13 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/reader/**" />
+			<mvc:mapping path="/lib/**" /> 
+			<mvc:exclude-mapping path="/reader/login" />
+			<bean class="cn.longkai.gardenias.interceptor.LoginIntercepter" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>

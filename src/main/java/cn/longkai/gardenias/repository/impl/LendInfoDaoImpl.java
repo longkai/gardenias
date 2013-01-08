@@ -9,6 +9,7 @@ import cn.longkai.gardenias.entity.LendInfo;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.repository.LendInfoDao;
 import cn.longkai.gardenias.util.LibraryUtil;
+import cn.longkai.gardenias.util.Pagination;
 
 /**
  * 图书借阅信息的数据访问实现。
@@ -26,6 +27,10 @@ public class LendInfoDaoImpl extends GeneralDaoImpl<LendInfo> implements LendInf
 	/** 查询用户尚未归还的该书借阅信息 */
 	private static final String SELECT_LENDED_BOOK_BY_BOOK_WITH_READER
 		= "FROM LendInfo li WHERE li.reader = :reader and li.book = :book and li.returnDate IS null";
+	
+	/** 列表查询 */
+	private static final String QUERY_LIST
+		= "FROM LendInfo t WHERE t.reader = ? ORDER BY t.date DESC";
 	
 	@Override
 	public int howManyLendedBooks(Reader reader) {
@@ -46,6 +51,11 @@ public class LendInfoDaoImpl extends GeneralDaoImpl<LendInfo> implements LendInf
 			info = null;
 		}
 		return info;
+	}
+
+	@Override
+	public Pagination<LendInfo> list(Reader reader, int offset, int size) {
+		return super.queryForList(LendInfo.class, QUERY_LIST, reader, offset, size);
 	}
 	
 }

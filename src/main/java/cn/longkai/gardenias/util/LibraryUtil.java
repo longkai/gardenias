@@ -5,7 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.longkai.gardenias.config.LIbraryConstant;
 import cn.longkai.gardenias.entity.Book;
@@ -104,7 +108,7 @@ public class LibraryUtil {
 	 * @param lendInfo
 	 */
 	public static boolean doesItCharged(LendInfo lendInfo) {
-		return calculateDaysGap(lendInfo.getLendDate()) > LIbraryConstant.MAX_LEND_DATE ? true : false;
+		return calculateDaysGap(lendInfo.getDate()) > LIbraryConstant.MAX_LEND_DATE ? true : false;
 	}
 	
 	/**
@@ -115,4 +119,14 @@ public class LibraryUtil {
 		return new SimpleDateFormat(DEFAULT_DATE_FOMAT_PATTERN).format(new Date());
 	}
 
+	/**
+	 * 同步一些信息
+	 * @param mav
+	 * @param request
+	 */
+	public static void synchroniz(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		mav.addObject("reader", session.getAttribute("r"));
+	}
+	
 }
