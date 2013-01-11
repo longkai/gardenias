@@ -24,6 +24,8 @@ import cn.longkai.gardenias.entity.Reader;
  */
 public class LibraryUtil {
 
+	public static final String ISO_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+	
 //	这里的时间都是按照图书馆的标准来的，借书一月就30天，别搞混淆了0.0
 //	注意long假如由int互相乘，很可能会溢出，所以至少乘数里面有一个long类型的值！！！
 	public static final String NOT_NULL = "对象不能为空！";

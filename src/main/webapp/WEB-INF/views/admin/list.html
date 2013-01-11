@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 登陆</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="/resources/css/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="/resources/js/jquery-1.8.2.min.js"></script>
+	<script src="/resources/js/jquery.mobile-1.2.0.min.js"></script>
+	<style type="text/css">
+		span.center {
+			text-align: center;
+		}
+	</style>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-add-back-btn="true">
+		<a href="/admin/index">首页</a>
+		<h1>欢迎管理员</h1>
+		<a href="/admin/logou">注销</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+
+		<ul data-role="listview" data-divider-theme="c" data-inset="true">
+			<#if type == 'Category'>
+		            <li data-role="list-divider" role="heading">
+		                <span class="center">类别列表</span>
+		            </li>
+				<#list p.list as c>
+					<li data-theme="c">
+			            <a href="/admin/view_category?id=${c.id}" data-transition="slide">
+			                ${c.name}
+			            </a>
+			        </li>
+				</#list>
+			<#elseif type == 'Reader'>
+					<li data-role="list-divider" role="heading">
+		                <span class="center">读者列表</span>
+		            </li>
+				<#list p.list as r>
+					<li data-theme="c">
+			            <a href="#" data-themeransition="slide">
+			                ${r.nick}
+			            </a>
+			        </li>
+				</#list>
+			<#else>
+					<li data-role="list-divider" role="heading">
+		                <span class="center">书籍列表</span>
+		            </li>
+				<#list p.list as b>
+					<li data-theme="c">
+			            <a href="/admin/view_book?id=${b.id}" data-transition="slide">
+			                ${b.title}
+			            </a>
+			        </li>	
+				</#list>
+			</#if>
+        </ul>
+        <p>
+        	共${p.total}页
+        	<a href="/admin/list/${type}?no=${p.prev}">上一页</a>
+        	<a href="/admin/list/${type}?no=${p.next}">下一页</a>
+        	当前${p.page}页
+        </p>
+	</div>
+</div>
+
+</body>
+</html>		
+
+
+
+
+
+

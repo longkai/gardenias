@@ -1,6 +1,8 @@
 package cn.longkai.gardenias.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +29,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.longkai.gardenias.config.LIbraryConstant;
 import cn.longkai.gardenias.entity.Admin;
+import cn.longkai.gardenias.entity.Book;
+import cn.longkai.gardenias.entity.BookingInfo;
 import cn.longkai.gardenias.entity.Category;
+import cn.longkai.gardenias.entity.ChargeInfo;
+import cn.longkai.gardenias.entity.LendInfo;
 import cn.longkai.gardenias.entity.Reader;
+import cn.longkai.gardenias.repository.BookDao;
 import cn.longkai.gardenias.repository.CategoryDao;
 import cn.longkai.gardenias.service.FetchInfo;
+import cn.longkai.gardenias.service.LibraryService;
 import cn.longkai.gardenias.service.ReaderService;
 import cn.longkai.gardenias.util.LibraryException;
 import cn.longkai.gardenias.util.LibraryMessages;
+import cn.longkai.gardenias.util.LibraryUtil;
 import cn.longkai.gardenias.util.Pagination;
 
 @Controller
@@ -47,7 +56,13 @@ public class ReaderController {
 	private ReaderService readerService;
 	
 	@Inject
+	private LibraryService libraryService;
+	
+	@Inject
 	private CategoryDao categoryDao;
+	
+	@Inject
+	private BookDao bookDao;
 	
 	@Inject
 	private FetchInfo fetchInfo;
@@ -135,7 +150,7 @@ public class ReaderController {
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request, Model model) {
 		model.addAttribute("reader", request.getSession(false).getAttribute("r"));
-		model.addAttribute("categories", categoryDao.list(0, LIbraryConstant.MAX_RECORDS_PER_PAGE, Category.class));
+		model.addAttribute("categories", categoryDao.list(1, LIbraryConstant.MAX_RECORDS_PER_PAGE, Category.class));
 		return "main";
 	}
 	
@@ -154,8 +169,62 @@ public class ReaderController {
 	
 	@RequestMapping("/zone")
 	public String zone() {
-		
 		return "zone";
 	}
+	
+	@RequestMapping("/view_info/{type}")
+	public String viewInfo(HttpSession session, @PathVariable String type, @RequestParam int id, Model model) {
+		Object info = fetchInfo.fetch(type, id);
+		model.addAttribute("info", info);
+		if (type.equals("LendInfo")) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(((LendInfo) info).getDate().getTime() + LibraryUtil.ONE_MONTH_MILLIS);
+			model.addAttribute("returnDate", c.getTime());
+		}
+		return "view_info";
+	}
+	
+	@RequestMapping("charge")
+	public String charge(HttpSession session, @RequestParam("book_id") int id, Model model) {
+//		ChargeInfo info = (ChargeInfo) fetchInfo.fetch("ChargeInfo", id);
+		Reader reader = (Reader) session.getAttribute("r");
+//		if (!reader.equals(info.getReader())) {
+//			throw new LibraryException(LibraryMessages.UNKNOWN_ERROR);
+//		}
+		Book book = bookDao.find(id, Book.class);
+		ChargeInfo info = libraryService.charge(book, reader);
+		model.addAttribute("info", info);
+		model.addAttribute("msg", "缴纳欠款成功！");
+		return "ok";
+	}
+	
+	@RequestMapping("/_return")
+	public String _return(HttpSession session, @RequestParam("lend_id") int id, Model model) {
+		LendInfo info = (LendInfo) fetchInfo.fetch("LendInfo", id);
+		Reader reader = (Reader) session.getAttribute("r");
+		if (!reader.equals(info.getReader())) {
+			throw new LibraryException(LibraryMessages.UNKNOWN_ERROR);
+		}
+		libraryService._return(info.getBook(), reader);
+		model.addAttribute("info", info);
+		model.addAttribute("msg", "归还图书成功！");
+		return "ok";
+	}
+	
+	@RequestMapping("/cancel")
+	public String cancel(HttpSession session, @RequestParam("booking_id") int id, Model model) {
+		BookingInfo info = (BookingInfo) fetchInfo.fetch("BookingInfo", id);
+		Reader reader = (Reader) session.getAttribute("r");
+		l.debug("r1.id:{}", reader.getId());
+		l.debug("r2.id:{}", info.getReader().getId());
+		if (!reader.equals(info.getReader())) {
+			throw new LibraryException(LibraryMessages.UNKNOWN_ERROR);
+		}
+		info = libraryService.cancel(info.getBook(), reader);
+		model.addAttribute("info", info);
+		model.addAttribute("msg", "取消预约图书成功!");
+		return "ok";
+	}
+
 
 }

@@ -45,5 +45,12 @@ public interface LibraryService {
 	 * @return 若成功，返回修改后（添加了罚款时间）的罚款记录
 	 */
 	ChargeInfo charge(Book book, Reader reader);
+
+	/**
+	 * 取消预约图书
+	 * @param book
+	 * @param reader
+	 */
+	BookingInfo cancel(Book book, Reader reader);
 	
 }

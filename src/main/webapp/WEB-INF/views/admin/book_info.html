@@ -1,0 +1,92 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 登陆</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="/resources/css/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="/resources/js/jquery-1.8.2.min.js"></script>
+	<script src="/resources/js/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-add-back-btn="true">
+		<a href="/admin/index">注销</a>
+		<h1>管理员 - 书籍管理</h1>
+		<a href="/admin/logout">注销</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<p>${msg}</p>
+        <img src="${b.image}" alt="image">
+
+		<form action="/admin/update_book?id=${b.id}" method="post" data-ajax="false">
+			<label for="title">书籍名称</label>
+			<input type="text" name="title" value="${b.title}" />
+			<label for="author">作者</label>
+			<input type="text" name="author" value="${b.author}" />
+
+			<input type="hidden" name="url" value="${b.url}" />
+
+			<label for="url">URL</label>
+			<input type="text" name="url" value="${b.url}" />
+			<label for="categoryId">类别</label>
+			<select name="categoryId" id="categoryId">
+			   	<option value="${b.category.id}" selected="selected">${b.category.name}</option>
+			   	<#list p.list as c>
+			   		<#if c.id != b.category.id>
+				   		<option value="${c.id}">${c.name}</option>
+				   	</#if>
+			   	</#list>
+			</select>
+
+			<label for="publishHouse">出版社</label>
+			<input type="text" name="publishHouse" value="${b.publishHouse}" />
+
+			<label for="publish_date">出版日期</label>
+			<input type="text" name="publish_date" value="${b.publishDate}" />
+
+			<label for="ISBN">ISBN</label>
+			<input type="text" name="ISBN" value="${b.ISBN}" />
+
+			<label for="price">价格</label>
+			<input type="text" name="price" value="${b.price}" />
+
+			<label for="borrowedTimes">借阅次数</label>
+			<input type="text" name="borrowedTimes" value="${b.borrowedTimes}" />
+
+			<label for="bookedTimes">预约次数</label>
+			<input type="text" name="bookedTimes" value="${b.bookedTimes}" />
+			
+			<label for="clickTimes">点击次数</label>
+			<input type="text" name="clickTimes" value="${b.clickTimes}" />
+
+			<label for="total">总数</label>
+			<input type="text" name="total" value="${b.total}" />
+
+			<label for="remain">余量</label>
+			<input type="text" name="remain" value="${b.remain}" />
+
+			<fieldset>
+			<label for="lendable">是否可借</label>
+			<select name="lendable" id="lendable" data-role="slider">
+				<option value="1">是</option>
+				<option value="0">否</option>
+			</select>
+			</fieldset>
+
+			<label for="description">书籍描述</label>
+			<input type="text" name="description" value="${b.description}" />
+
+			<label for="includedDate">加入日期</label>
+			<input type="text" name="includedDate" value="${b.includedDate?string("yyyy-MM-dd HH:mm:ss")}" disabled="true" />
+
+			<input type="submit" value="确认修改！" />
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

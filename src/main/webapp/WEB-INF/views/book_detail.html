@@ -28,62 +28,59 @@
 		<p>
 			${b.description}
 		</p>
-		<table>
-			<tr>
-				<td>作者</td>
-				<td>${b.author}</td>
-			</tr>
-			<tr>
-				<td>出版时间</td>
-				<td>${b.publishDate?string("yyyy-MM-dd")}</td>
-			</tr>
-			<tr>
-				<td>出版社</td>
-				<td>${b.publishHouse}</td>
-			</tr>
-			<tr>
-				<td>ISBN</td>
-				<td>${b.ISBN}</td>
-			</tr>
-			<tr>
-				<td>售价</td>
-				<td>${b.price}</td>
-			</tr>
-			<tr>
-				<td>借阅次数</td>
-				<td>${b.borrowedTimes}</td>
-			</tr>
-			<tr>
-				<td>预约次数</td>
-				<td>${b.bookedTimes}</td>
-			</tr>
-			<tr>
-				<td>点击数</td>
-				<td>${b.clickTimes}</td>
-			</tr>
-			<tr>
-				<td>馆存数量</td>
-				<td>${b.total}</td>
-			</tr>
-			<tr>
-				<td>在架数量</td>
-				<td>${b.remain}</td>
-			</tr>
-			<tr>
-				<td>允许借阅</td>
-				<td>
-					<#if b.lendable == true>
-						是
-					<#else>
-						否
-					</#if>
-				</td>
-			</tr>
-			<tr>
-				<td>收藏日期</td>
-				<td>${b.includedDate?string("yyyy-MM-dd")}</td>
-			</tr>
-		</table>
+		<form action="" method="post" data-ajax="false">
+			<label for="title">书籍名称</label>
+			<input type="text" name="title" value="${b.title}" disabled="true" />
+			<label for="author">作者</label>
+			<input type="text" name="author" value="${b.author}" disabled="true" />
+
+			<input type="hidden" name="url" value="${b.url}" />
+
+			<label for="url">URL</label>
+			<input type="text" name="url" value="${b.url}" disabled="true" />
+			<label for="categoryId">类别</label>
+			<select name="categoryId" id="categoryId" disabled="true">
+			   	<option value="${b.category.id}" selected="selected">${b.category.name}</option>
+			</select>
+
+			<label for="publishHouse">出版社</label>
+			<input type="text" name="publishHouse" value="${b.publishHouse}" disabled="true" />
+
+			<label for="publish_date">出版日期</label>
+			<input type="text" name="publish_date" value="${b.publishDate}" disabled="true" />
+
+			<label for="ISBN">ISBN</label>
+			<input type="text" name="ISBN" value="${b.ISBN}" disabled="true" />
+
+			<label for="price">价格</label>
+			<input type="text" name="price" value="${b.price}" disabled="true" />
+
+			<label for="borrowedTimes">借阅次数</label>
+			<input type="text" name="borrowedTimes" value="${b.borrowedTimes}" disabled="true" />
+
+			<label for="bookedTimes">预约次数</label>
+			<input type="text" name="bookedTimes" value="${b.bookedTimes}" disabled="true" />
+			
+			<label for="clickTimes">点击次数</label>
+			<input type="text" name="clickTimes" value="${b.clickTimes}" disabled="true" />
+
+			<label for="total">总数</label>
+			<input type="text" name="total" value="${b.total}" disabled="true" />
+
+			<label for="remain">余量</label>
+			<input type="text" name="remain" value="${b.remain}" disabled="true" />
+
+			<fieldset>
+			<label for="lendable">是否可借</label>
+			<select name="lendable" id="lendable" data-role="slider" disabled="true">
+				<option value="1">是</option>
+				<option value="0">否</option>
+			</select>
+			</fieldset>
+
+			<label for="includedDate">加入日期</label>
+			<input type="text" name="includedDate" value="${b.includedDate?string("yyyy-MM-dd HH:mm:ss")}" disabled="true" disabled="true" />
+		</form>
 	</div>
 </div>
 

@@ -14,4 +14,13 @@ import cn.longkai.gardenias.repository.AdminDao;
 @Repository
 public class AdminDaoImpl extends GeneralDaoImpl<Admin> implements AdminDao {
 
+	/** 查找一个认证的管理员 */
+	private static final String QUERY_FOR_ADMIN 
+		= "FROM Admin a where a.username = ? and a.password = ?";
+	
+	@Override
+	public Admin find(String username, String password) {
+		return super.executeQuery(QUERY_FOR_ADMIN, Admin.class, username, password);
+	}
+
 }

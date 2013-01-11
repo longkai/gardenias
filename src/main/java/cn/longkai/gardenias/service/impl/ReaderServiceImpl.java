@@ -1,5 +1,6 @@
 package cn.longkai.gardenias.service.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -98,4 +99,20 @@ public class ReaderServiceImpl implements ReaderService, FetchInfo {
 		}
 	}
 
+	@Override
+	public Object fetch(String type, Serializable id) {
+		switch (type) {
+		case "BookingInfo":
+			return bookingInfoDao.find(id, BookingInfo.class);
+		case "ChargeInfo":
+			return chargeInfoDao.find(id, ChargeInfo.class);
+		case "LendInfo":
+			return lendInfoDao.find(id, LendInfo.class);
+		default:
+			throw new LibraryException(LibraryMessages.UNKNOWN_ERROR);
+		}
+	}
+	
+	
+	
 }

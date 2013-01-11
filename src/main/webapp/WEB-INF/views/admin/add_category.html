@@ -13,16 +13,17 @@
 
 <div data-role="page">
 	<div data-role="header" data-add-back-btn="true">
-		<a href="/">返回首页</a>
-		<h1>欢迎登陆图书馆！</h1>
-		<a href="/resources/html/register.html">读者注册</a>
+		<a href="/admin/index">注销</a>
+		<h1>管理员 - 类别添加</h1>
+		<a href="/admin/logout">注销</a>
 	</div>
 
 	<div data-role="content" data-theme="a">
-		<form action="/reader/login" method="post" data-ajax="false">
-			<input type="text" name="account" id="account" value="" placeholder="读者账号" />
-			<input type="password" name="password" id="password" value="" placeholder="读者密码" />
-			<input type="submit" value="登陆！" />
+		<form action="/admin/add_category" method="post" data-ajax="false">
+			<input type="text" name="name" value="" placeholder="类别名称" />
+			<input type="text" name="description" value="" placeholder="类别描述" />
+
+			<input type="submit" value="确认提交！" />
 		</form>
 	</div>
 </div>

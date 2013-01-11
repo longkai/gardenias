@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 登陆</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="/resources/css/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="/resources/js/jquery-1.8.2.min.js"></script>
+	<script src="/resources/js/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-add-back-btn="true">
+		<a href="/admin/index">注销</a>
+		<h1>管理员 - 书籍添加</h1>
+		<a href="/admin/logout">注销</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<form action="/admin/add_book" method="post" data-ajax="false">
+			<input type="text" name="title" placeholder="书名" />
+			<input type="text" name="author" placeholder="作者" />
+
+			<input type="text" name="url" placeholder="URL" />
+			<select name="categoryId" id="categoryId">
+			   	<option value="-1" selected="selected">类别</option>
+			   	<#list p.list as c>
+				   	<option value="${c.id}">${c.name}</option>
+			   	</#list>
+			</select>
+
+			<input type="text" name="publishHouse" placeholder="出版社" />
+
+			<input type="text" name="publish_date" placeholder="出版日期" />
+
+			<input type="text" name="ISBN" placeholder="ISBN" />
+
+			<input type="text" name="price" placeholder="价格" />
+
+			<input type="text" name="total" placeholder="总数" />
+
+			<label for="lendable">是否可借</label>
+			<input id="radio1" name="lendable" value="1" type="radio">
+            <label for="radio1">
+                是
+            </label>
+            <input id="radio2" name="lendable" value="0" type="radio">
+            <label for="radio2">
+                否
+            </label>
+
+			<label for="description">
+                书籍描述
+            </label>
+            <textarea name="description" id="description" placeholder="书籍描述"></textarea>
+
+			<input type="submit" value="确认添加！" />
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

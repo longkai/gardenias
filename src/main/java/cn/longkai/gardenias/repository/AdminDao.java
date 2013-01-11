@@ -10,4 +10,11 @@ import cn.longkai.gardenias.entity.Admin;
  */
 public interface AdminDao extends GenericDao<Admin> {
 
+	/**
+	 * 查找管理员账号
+	 * @param username
+	 * @param password
+	 */
+	Admin find(String username, String password);
+	
 }

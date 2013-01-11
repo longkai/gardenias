@@ -1,5 +1,8 @@
 package cn.longkai.gardenias.service;
 
+import java.io.Serializable;
+
+import cn.longkai.gardenias.entity.Book;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.util.Pagination;
 
@@ -18,5 +21,22 @@ public interface FetchInfo {
 	 * @param NO
 	 */
 	Pagination<?> fetch(String type, Reader reader, int NO);
+	
+//	由于页面可以直接传递info的id，所以这个也就可以没必要了，用下面那个-_-
+	/**
+	 * 根据
+	 * @param type
+	 * @param reader
+	 * @param book
+	 * @return
+	 */
+//	<X> X fetch(String type, Reader reader, Book book);
+	
+	/**
+	 * 根据类型和主键，返回信息
+	 * @param type
+	 * @param id
+	 */
+	Object fetch(String type, Serializable id);
 	
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<meta charset="UTF-8" />
+	<title>图书馆 - 登陆</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/resources/css/themes/lk.min.css" />
+	<link rel="stylesheet" href="/resources/css/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="/resources/js/jquery-1.8.2.min.js"></script>
+	<script src="/resources/js/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-add-back-btn="true">
+		<a href="/admin/index">注销</a>
+		<h1>管理员 - 类别管理</h1>
+		<a href="/admin/logout">注销</a>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<p>${msg}</p>
+		<form action="/admin/update_category?id=${c.id}" method="post" data-ajax="false">
+			<label for="name">类别名称</label>
+			<input type="text" name="name" value="${c.name}" />
+
+			<label for="description">类别描述</label>
+			<input type="text" name="description" value="${c.description}" />
+
+			<label for="include_date">加入日期</label>
+			<input type="text" name="include_date" value="${c.includeDate?string("yyyy-MM-dd HH:mm:ss")}" disabled="true" />
+
+			<input type="submit" value="确认修改！" />
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

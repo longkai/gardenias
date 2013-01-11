@@ -22,6 +22,12 @@
 			<mvc:exclude-mapping path="/reader/login" />
 			<bean class="cn.longkai.gardenias.interceptor.LoginIntercepter" />
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<mvc:exclude-mapping path="/admin/login" />
+			<bean class="cn.longkai.gardenias.interceptor.AdminLoginInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 </beans>

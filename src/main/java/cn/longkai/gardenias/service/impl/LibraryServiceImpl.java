@@ -302,6 +302,15 @@ public class LibraryServiceImpl implements LibraryService {
 		BookingInfo bookingInfo = bookingInfoDao.find(book, reader);
 		return bookingInfo == null ? false : true;
 	}
+
+	@Override
+	public BookingInfo cancel(Book book, Reader reader) {
+		BookingInfo info = bookingInfoDao.find(book, reader);
+		info.setCancel(true);
+		info.setDeal(true);
+		bookingInfoDao.merge(info);
+		return info;
+	}
 	
 	/**
 	 * 该书是否已经被预约了。

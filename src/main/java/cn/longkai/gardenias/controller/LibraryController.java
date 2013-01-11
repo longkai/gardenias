@@ -10,17 +10,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.longkai.gardenias.config.LIbraryConstant;
 import cn.longkai.gardenias.entity.Book;
 import cn.longkai.gardenias.entity.BookingInfo;
 import cn.longkai.gardenias.entity.Category;
+import cn.longkai.gardenias.entity.ChargeInfo;
 import cn.longkai.gardenias.entity.LendInfo;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.repository.BookDao;
 import cn.longkai.gardenias.repository.CategoryDao;
+import cn.longkai.gardenias.repository.InfoAware;
 import cn.longkai.gardenias.service.LibraryService;
 import cn.longkai.gardenias.service.ReaderService;
 import cn.longkai.gardenias.util.LibraryException;
@@ -45,6 +49,9 @@ public class LibraryController {
 	
 	@Inject
 	private BookDao bookDao;
+	
+//	@Inject
+//	private InfoAware<LendInfo> infoAware;
 	
 	@ExceptionHandler
 	public ModelAndView exception(LibraryException e) {
