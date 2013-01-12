@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import cn.longkai.gardenias.entity.ChargeInfo;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.repository.GenericDao;
 import cn.longkai.gardenias.util.Pagination;
@@ -85,6 +84,22 @@ public abstract class GeneralDaoImpl<T> implements GenericDao<T> {
 				.setMaxResults(howMany)
 				.getResultList();
 		return p.setList(list);
+	}
+
+	/**
+	 * 查询
+	 * @param hql
+	 * @param offset
+	 * @param size
+	 * @param type
+	 * @param objects
+	 * @return
+	 */
+	protected <X> Pagination<X> list(String hql, int offset, int size, Class<X> type, Object...objects) {
+		l.debug("{}", objects);
+		int total = this.executeQuery("SELECT COUNT(t.id) " + hql, Long.class, objects).intValue();;
+		Pagination<X> p = new Pagination<>(offset, size, total);
+		return p.setList(this.queryForList(hql, type, p.getBeginRow(), size, objects));
 	}
 	
 	/**

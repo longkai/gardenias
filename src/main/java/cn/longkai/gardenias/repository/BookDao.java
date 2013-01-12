@@ -20,4 +20,20 @@ public interface BookDao extends GenericDao<Book> {
 	 */
 	Pagination<Book> list(int NO, int howMany, Category category);
 	
+	/**
+	 * 查找，通过title
+	 * @param offset
+	 * @param howMany
+	 * @param title
+	 */
+	Pagination<Book> findByTitle(int offset, int howMany, String title);
+	
+	/**
+	 * 查找，通过作者名。
+	 * @param offset
+	 * @param howMany
+	 * @param author
+	 */
+	Pagination<Book> findByAuthor(int offset, int howMany, String author);
+	
 }

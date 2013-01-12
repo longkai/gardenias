@@ -21,6 +21,14 @@ public class BookDaoImpl extends GeneralDaoImpl<Book> implements BookDao {
 	/** 查询 某一类别的图书 */
 	private static final String QUERY_BOOKS_BY_CATEGORY = "FROM Book b WHERE b.category.id = ";
 	
+	/** 根据书名查找 */
+	private static final String QUERY_BOOKS_BY_TITLE
+		= "FROM Book t WHERE t.title like ?";
+	
+	/** 根据作者查找 */
+	private static final String QUERY_BOOKS_BY_AUTHOR
+		= "FROM Book t WHERE t.author like ?";
+	
 	@Override
 	public Pagination<Book> list(int NO, int howMany, Category category) {
 		List<Book> books = em.createQuery(QUERY_BOOKS_BY_CATEGORY + category.getId(), Book.class)
@@ -28,6 +36,16 @@ public class BookDaoImpl extends GeneralDaoImpl<Book> implements BookDao {
 				.getResultList();
 		Pagination<Book> p = new Pagination<>(NO, howMany, books.size());
 		return p.setList(books);
+	}
+
+	@Override
+	public Pagination<Book> findByTitle(int offset, int howMany, String title) {
+		return super.list(QUERY_BOOKS_BY_TITLE, offset, howMany, Book.class, "%" + title + "%");
+	}
+
+	@Override
+	public Pagination<Book> findByAuthor(int offset, int howMany, String author) {
+		return super.list(QUERY_BOOKS_BY_AUTHOR, offset, howMany, Book.class, "%" + author + "%");
 	}
 
 }

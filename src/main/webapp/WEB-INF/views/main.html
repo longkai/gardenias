@@ -25,6 +25,15 @@
 			<li><a href="">查看预约图书信息</a></li>
 			<li><a href="">查询图书</a></li>
 		</ul> -->
+		<form action="" method="post" data-ajax="false" id="search">
+			<label for="type">类别:</label>
+			<select name="type" id="type" data-role="slider">
+				<option value="1">通过书名</option>
+				<option value="2">通过作者</option>
+			</select>
+			<input type="text" name="keywords" placeHolder="请输入关键字！" />
+			<input type="submit" value="确认搜索！" />
+		</form>
 		<div data-role="navbar">
 			<ul>
 				<#list categories.list as c>
@@ -34,6 +43,13 @@
 		</div>
 	</div>
 </div>
-
+	<script type="text/javascript">
+		$(function() {
+			$('input[type="submit"]').click(function() {
+				var type = $('option:selected').val();
+				$('#search').attr('action', '/reader/search/{type}?no=1'.replace('{type}', type)).submit();
+			})
+		})
+	</script>
 </body>
 </html>
