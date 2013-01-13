@@ -1,6 +1,5 @@
 package cn.longkai.gardenias.repository.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -28,7 +27,7 @@ public class ChargeInfoDaoImpl extends GeneralDaoImpl<ChargeInfo> implements Cha
 	
 	/** 查询一条确定的罚款记录 */
 	private static final String SELECT_CHARGEINFO_BY_BOOK_AND_READER 
-		= "FROM ChargeInfo t WHERE t.book = :book AND t.reader = :reader AND t.chargeDate IS null";
+		= "FROM ChargeInfo t WHERE t.book = :book AND t.reader = :reader AND t.date IS null";
 	
 	/** 用户列表查询 */
 	private static final String QUERY_LIST

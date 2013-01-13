@@ -25,7 +25,7 @@ public class BookingInfoDaoImpl extends GeneralDaoImpl<BookingInfo> implements B
 	
 	/** 查询有效的图书预约数量 */
 	private static final String SELECT_BOOKED_COUNT_BY_READER 
-		= "SELECT COUNT(t.id) FROM BookingInfo t where t.reader = ? AND t.cancel IS false AND t.deal IS false and t.bookDate < ?";
+		= "SELECT COUNT(t.id) FROM BookingInfo t where t.reader = ? AND t.cancel IS false AND t.deal IS false and t.date < ?";
 	
 	/** 查询一本书有效地预约数量 */
 	private static final String SELECT_HAS_BEEN_BOOKED_BY_BOOK

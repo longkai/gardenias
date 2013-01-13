@@ -2,7 +2,6 @@ package cn.longkai.gardenias.service;
 
 import java.io.Serializable;
 
-import cn.longkai.gardenias.entity.Book;
 import cn.longkai.gardenias.entity.Reader;
 import cn.longkai.gardenias.util.Pagination;
 

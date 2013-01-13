@@ -26,7 +26,7 @@ public class LendInfoDaoImpl extends GeneralDaoImpl<LendInfo> implements LendInf
 	
 	/** 查询用户尚未归还的该书借阅信息 */
 	private static final String SELECT_LENDED_BOOK_BY_BOOK_WITH_READER
-		= "FROM LendInfo li WHERE li.reader = :reader and li.book = :book and li.returnDate IS null";
+		= "FROM LendInfo li WHERE li.reader = :reader and li.book = :book and li.date IS null";
 	
 	/** 列表查询 */
 	private static final String QUERY_LIST

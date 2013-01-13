@@ -1,8 +1,6 @@
 package cn.longkai.gardenias.service;
 
-import cn.longkai.gardenias.entity.BookingInfo;
 import cn.longkai.gardenias.entity.Reader;
-import cn.longkai.gardenias.util.Pagination;
 
 /**
  * 读者的对外服务接口。
