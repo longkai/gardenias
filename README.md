@@ -2,6 +2,6 @@
 
 将mysql的sql问就爱你导入数据库后，更高config包里的SpringBeans.java里的用户名密码。
 
-装有eclipse的m2e插件，导入后，运行 mvn jettu:run 即可运行。
+装有eclipse的m2e插件，导入后，运行 mvn jetty:run 即可运行。
 
-有问题的话欢迎邮件联系我，im.longkai@gmail.co
+有问题的话欢迎邮件联系我，im.longkai@gmail.com
