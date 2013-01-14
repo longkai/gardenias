@@ -17,12 +17,4 @@ public interface LendInfoDao extends GenericDao<LendInfo>, InfoAware<LendInfo> {
 	 */
 	int howManyLendedBooks(Reader reader);
 
-//	这里也扩展了接口-_-
-//	/**
-//	 * 返回<b style="color: red;">尚未归还的</b>这条借阅记录。
-//	 * @param book
-//	 * @param reader
-//	 */
-//	LendInfo find(Book book, Reader reader);
-	
 }
